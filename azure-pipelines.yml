@@ -68,7 +68,7 @@ stages:
       runOnce:
         deploy:
           steps:
-            - script: |
+        - script: |
     sudo update-alternatives --set php /usr/bin/php$(phpVersion)
     sudo update-alternatives --set phar /usr/bin/phar$(phpVersion)
     sudo update-alternatives --set phpdbg /usr/bin/phpdbg$(phpVersion)
