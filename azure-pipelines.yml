@@ -10,11 +10,11 @@ variables:
   # Azure Resource Manager connection created during pipeline creation
   azureSubscription: 'subscription-id'
   # Web app name
-  webAppName: 'web-app-name'
+  webAppName: 'demo'
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
   # Environment name
-  environmentName: 'environment-name'
+  environmentName: 'test'
   # Root folder under which your composer.json file is available.
   rootFolder: $(System.DefaultWorkingDirectory)
 
@@ -22,7 +22,7 @@ stages:
 - stage: Build
   displayName: Build stage
   variables:
-    phpVersion: '7.3'
+    phpVersion: '7.2'
   jobs:
   - job: BuildJob
     pool:
