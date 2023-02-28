@@ -3,4 +3,4 @@ FROM php:7.2
 RUN mkdir /app
 COPY . /app
 WORKDIR /app
-RUN 
+RUN composer install --no-interaction --prefer-dist
