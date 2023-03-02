@@ -10,7 +10,7 @@ variables:
   # Azure Resource Manager connection created during pipeline creation
   azureSubscription: 'subscription-id'
   # Web app name
-  webAppName: 'demo'
+  webAppName: 'php_demo'
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
   # Environment name
@@ -38,9 +38,9 @@ stages:
       workingDirectory: $(rootFolder)
       displayName: 'Use PHP version $(phpVersion)'
 
-    - script: composer install --no-interaction --prefer-dist
-      workingDirectory: $(rootFolder)
-      displayName: 'Composer install'
+    # - script: composer install --no-interaction --prefer-dist
+    #   workingDirectory: $(rootFolder)
+    #   displayName: 'Composer install'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
@@ -54,3 +54,12 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       displayName: 'Upload package'
       artifact: drop
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'braindevopstraining'
+        repository: '$(webAppName)'
+        command: 'buildAndPush'
+        Dockerfile: 'Dockerfile'
+        tags: |
+           $(Build.BuildId)
+           latest
